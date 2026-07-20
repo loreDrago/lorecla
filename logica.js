@@ -21,7 +21,7 @@
         aggiornaContatore();
         setInterval(aggiornaContatore, 1000);
 
-        const frasi = [
+            var frasi = [
             "i tuoi occhi da bambi",
             "il tuo sorriso",
             "come ti acciti quando ci vediamo",
@@ -58,7 +58,7 @@
             "per i lughi audio che mi mandi",
             "per i video haul che mi mandi",
             "per i tuoi fit check",
-            "per tutti i complimenti che mi fai",
+            "per tutti gli insulti che mi fai",
             "per come riusciamo a divertirci con poco",
             "per i video che mi ritrovo nella galleria dopo giorni",
             "per tutti i complimenti che mi fai",
@@ -95,14 +95,46 @@
             "per le cose dolci che ci scriviamo",
             "per quel primo appuntamento",
             "per quando mi dici 'ti mangio'",
-            "per quando mi proponi di mangiare"
+            "per quando mi proponi di mangiare",
+            "per come mi tieni per mano",
+            "per quando appoggi la testa sulla mia spalla",
+            "perchè sei unica",
+            "per tutte le volte che mi sopporti quando mi deprimo",
+            "perchè sei l'amore della mia vita e non ti scambierei per nulla al mondo",
+            "perchè si"
 
 
 
         ];
 
-        function mostraFraseCasuale() {
-            const indiceCasuale = Math.floor(Math.random() * frasi.length);
-            const fraseScelta = frasi[indiceCasuale];
-            document.getElementById("frase").textContent = fraseScelta;
+        // Indice per tenere traccia della frase corrente
+let indiceCorrente = 0;
+function mescolaArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+mescolaArray(frasi);
+
+function mostraFraseCasuale() {
+    const tasto = document.querySelector("button");
+
+    // Controlla se siamo arrivati all'ultima frase
+    if (indiceCorrente < frasi.length) {
+        // Mostra la frase corrente
+        document.getElementById("frase").textContent = frasi[indiceCorrente];
+        document.getElementById("indice").textContent = indiceCorrente + 1;
+        
+        indiceCorrente++;
+        
+        if (indiceCorrente === frasi.length) {
+            tasto.disabled = true;
+            tasto.textContent = "Li hai letti tutti! ❤️";
+            tasto.style.cursor = "not-allowed";
+            tasto.style.opacity = "0.7";
         }
+}
+}
+
